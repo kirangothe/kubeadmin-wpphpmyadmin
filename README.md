@@ -1,0 +1,1 @@
+# kubeadmin - wp - mysql - phpmyadmin
