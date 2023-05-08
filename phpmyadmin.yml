@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phpmyadmin
+spec:
+  selector:
+    matchLabels:
+      app: phpmyadmin
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: phpmyadmin
+    spec:
+      containers:
+      - image: phpmyadmin/phpmyadmin:latest
+        name: phpmyadmin
+        envFrom:
+        - configMapRef:
+            name: phpmyadmin-config
+        - secretRef: 
+            name: phpmyadmin-secret
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: phpmyadmin-persistent-storage
+          mountPath: /sessions
+      volumes:
+      - name: phpmyadmin-persistent-storage
+        persistentVolumeClaim:
+          claimName: phpmyadmin-pvc
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: phpmyadmin-svc
+  labels:
+    app: phpmyadmin
+spec:
+  type: NodePort
+  ports:
+  - port: 8081
+    targetPort: 80
+  selector:
+    app: phpmyadmin
+
+
