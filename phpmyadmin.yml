@@ -39,8 +39,7 @@ metadata:
   name: phpmyadmin-svc
   labels:
     app: phpmyadmin
-spec:
-  type: NodePort
+spec: 
   ports:
   - port: 8081
     targetPort: 80
