@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: phpmyadmin-config
 data:
-  PMA_HOST: mysql-svc
+  PMA_HOST: dbmysql-svc
   PMA_PORT: "3306"
