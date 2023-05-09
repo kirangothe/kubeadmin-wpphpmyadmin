@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql
+  name: dbmysql
 spec:
   selector:
     matchLabels:
-      app: mysql
+      app: dbmysql
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: mysql
+        app: dbmysql
     spec:
       containers:
       - image: mysql:latest
-        name: mysql
+        name: dbmysql
         envFrom:
         - configMapRef:
             name: db-config
@@ -36,12 +36,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql-svc
+  name: dbmysql-svc
   labels:
-    app: mysql
+    app: dbmysql
 spec:
   ports:
   - port: 3306
   selector:
-    app: mysql 
-
+    app: dbmysql
