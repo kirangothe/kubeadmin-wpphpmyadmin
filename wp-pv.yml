@@ -4,7 +4,7 @@ metadata:
   name: wp-pv
 spec:
   capacity:
-    storage: 100Mi
+    storage: 500Mi
   accessModes:
     - ReadWriteOnce
   hostPath:
